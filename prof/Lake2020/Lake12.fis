@@ -1,0 +1,65 @@
+[System]
+Name='Lake12'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=15
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Level'
+Range=[-1 1]
+NumMFs=4
+MF1='Low':'trapmf',[-1 -1 -0.5 -0.0177]
+MF2='Normal':'trapmf',[-0.516077170418006 -0.0434 0.108 0.426]
+MF3='high':'trapmf',[0.454983922829582 0.953 1 1]
+MF4='QuiteHigh':'trimf',[0.136655948553055 0.442 0.937]
+
+[Input2]
+Name='request'
+Range=[0 1]
+NumMFs=3
+MF1='no':'trimf',[0 0 0.196945337620579]
+MF2='spring':'trimf',[0 0.2 0.983118971061093]
+MF3='summer':'trapmf',[0.205 0.968649517684888 1 1]
+
+[Input3]
+Name='Meteo'
+Range=[0 1]
+NumMFs=4
+MF1='No':'trimf',[-0.417 0 0.0586816720257234]
+MF2='Poco':'trimf',[0.00563 0.198553054662379 0.355]
+MF3='Tanto':'trimf',[0.2 0.35 0.6]
+MF4='Tempesta':'trapmf',[0.358 0.579581993569132 1 1]
+
+[Output1]
+Name='release'
+Range=[0 1]
+NumMFs=5
+MF1='no':'trimf',[-0.417 0 0.02347]
+MF2='mid':'trimf',[0.474 0.5 0.515]
+MF3='top':'trimf',[0.980612244897959 1 1.42]
+MF4='low':'trimf',[0.18 0.2 0.22]
+MF5='MIdTop':'trimf',[0.721 0.741961414790997 0.76]
+
+[Rules]
+1 1 0, 1 (1) : 1
+1 2 -4, 4 (1) : 1
+1 3 0, 2 (1) : 1
+2 1 0, 1 (1) : 1
+2 2 0, 2 (1) : 1
+2 3 0, 5 (1) : 1
+3 1 0, 4 (1) : 1
+3 2 0, 2 (1) : 1
+3 3 0, 3 (1) : 1
+4 1 0, 1 (1) : 1
+4 2 0, 2 (1) : 1
+4 3 0, 3 (1) : 1
+0 0 1, 1 (1) : 1
+0 0 2, 1 (1) : 1
+1 2 4, 2 (1) : 1

@@ -1,0 +1,59 @@
+[System]
+Name='CruiseControl'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=2
+NumRules=12
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='SafetyDistance'
+Range=[0 1]
+NumMFs=4
+MF1='VeryNear':'trimf',[0 0 0.1]
+MF2='Near':'trimf',[0 0.1 0.2]
+MF3='Mid':'trapmf',[0.1 0.2 0.5 0.8]
+MF4='Far':'trapmf',[0.5 0.8 1 1]
+
+[Input2]
+Name='DeltaSpeed'
+Range=[-130 130]
+NumMFs=3
+MF1='OK':'trapmf',[-5 -3 3 5]
+MF2='Low':'trapmf',[-130 -130 -5 -3]
+MF3='High':'trapmf',[3 5 130 130]
+
+[Output1]
+Name='Brake'
+Range=[0 1]
+NumMFs=3
+MF1='No':'trimf',[0 0 0]
+MF2='ALittle':'trimf',[0.3 0.3 0.3]
+MF3='Max':'trimf',[1 1 1]
+
+[Output2]
+Name='DeltaOutSpeed'
+Range=[-10 10]
+NumMFs=3
+MF1='Stay':'trimf',[0 0 0]
+MF2='Decelerate':'trimf',[-10 -10 -10]
+MF3='Accellerate':'trimf',[10 10 10]
+
+[Rules]
+1 1, 2 1 (1) : 1
+2 1, 1 1 (1) : 1
+3 1, 1 1 (1) : 1
+4 1, 1 1 (1) : 1
+1 2, 2 1 (1) : 1
+2 2, 1 1 (1) : 1
+3 2, 1 3 (1) : 1
+4 2, 1 3 (1) : 1
+1 3, 3 2 (1) : 1
+2 3, 2 2 (1) : 1
+3 3, 1 2 (1) : 1
+4 3, 1 2 (1) : 1

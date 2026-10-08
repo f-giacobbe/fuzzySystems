@@ -1,0 +1,56 @@
+[System]
+Name='Lake2'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Level'
+Range=[-1 1]
+NumMFs=3
+MF1='Below':'sigmf',[-9.05 -0.342857142857143]
+MF2='OK':'gbellmf',[0.25 4.71 0]
+MF3='Above':'sigmf',[10.99 0.25]
+
+[Input2]
+Name='Request'
+Range=[0 1]
+NumMFs=3
+MF1='low':'trimf',[0 -0 0.4]
+MF2='mid':'trimf',[0 0.4 1.00510204081633]
+MF3='High':'trimf',[0.4 1 1]
+
+[Input3]
+Name='Meteo'
+Range=[0 1]
+NumMFs=3
+MF1='dry':'trimf',[0 0 0.4]
+MF2='rain':'trapmf',[0.3 0.4 0.8 1]
+MF3='storm':'trimf',[0.8 1 1]
+
+[Output1]
+Name='Released'
+Range=[0 1]
+NumMFs=4
+MF1='Null':'trimf',[0 0 0]
+MF2='Few':'trimf',[0.2 0.2 0.2]
+MF3='Mid':'trimf',[0.5 0.5 0.5]
+MF4='ALot':'trimf',[1 1 1]
+
+[Rules]
+1 1 0, 1 (1) : 1
+1 2 0, 1 (1) : 1
+1 3 0, 2 (1) : 1
+2 1 0, 2 (1) : 1
+2 2 0, 3 (1) : 1
+2 3 0, 4 (1) : 1
+3 1 0, 2 (1) : 1
+3 2 0, 3 (1) : 1
+3 3 0, 4 (1) : 1

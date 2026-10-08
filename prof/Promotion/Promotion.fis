@@ -1,0 +1,60 @@
+[System]
+Name='Promotion'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='budget'
+Range=[0 1]
+NumMFs=3
+MF1='Low':'trapmf',[0 0 0.1 0.3]
+MF2='average':'trapmf',[0.1 0.3 0.7 0.9]
+MF3='a_lot':'trapmf',[0.7 0.9 1 1]
+
+[Input2]
+Name='Difference_s_e'
+Range=[-1 1]
+NumMFs=3
+MF1='Negative':'trapmf',[-1 -1 -0.3 0]
+MF2='OK':'trimf',[-0.3 0 0.1]
+MF3='Positive':'trapmf',[0 0.1 1 1]
+
+[Input3]
+Name='n_of_months'
+Range=[1 11]
+NumMFs=5
+MF1='1':'trimf',[1 1 1]
+MF2='2':'trimf',[2 2 2]
+MF3='3':'trimf',[3 3 3]
+MF4='6':'trimf',[6 6 6]
+MF5='11':'trimf',[11 11 11]
+
+[Output1]
+Name='Month_budget'
+Range=[0 1]
+NumMFs=6
+MF1='Nothing':'trimf',[0 0 0.01]
+MF2='mid':'trimf',[0.5 0.5 0.5]
+MF3='all':'trimf',[0.99 1 1]
+MF4='low':'trimf',[0.25 0.25 0.25]
+MF5='a_lot':'trimf',[0.75 0.75 0.75]
+MF6='very_low':'trimf',[0.1 0.1 0.1]
+
+[Rules]
+1 1 5, 6 (1) : 1
+1 2 5, 1 (1) : 1
+1 3 5, 1 (1) : 1
+2 1 5, 4 (1) : 1
+2 2 5, 1 (1) : 1
+2 3 5, 1 (1) : 1
+3 1 5, 4 (1) : 1
+3 2 5, 4 (1) : 1
+3 3 5, 1 (1) : 1
